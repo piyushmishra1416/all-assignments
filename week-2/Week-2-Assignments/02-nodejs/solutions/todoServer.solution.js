@@ -44,6 +44,9 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const cors = require('cors');
+app.use(cors());
+
 app.use(bodyParser.json());
 
 let todos = [];
@@ -67,6 +70,7 @@ app.post('/todos', (req, res) => {
     title: req.body.title,
     description: req.body.description
   };
+  console.log(newTodo)
   todos.push(newTodo);
   res.status(201).json(newTodo);
 });
@@ -88,7 +92,7 @@ app.delete('/todos/:id', (req, res) => {
     res.status(404).send();
   } else {
     todos.splice(todoIndex, 1);
-    res.status(200).send();
+    res.status(200).send({ message: 'Todo deleted successfully' });
   }
 });
 
@@ -97,4 +101,4 @@ app.use((req, res, next) => {
   res.status(404).send();
 });
 
-module.exports = app;
+app.listen(3000);
