@@ -1,16 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 
-/// File is incomplete. You need to add input boxes to take input for users to register.
-function Register() {
-    const [email, setEmail] = React.useState("");
+function Signup() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-    return <div>
-        <h1>Register to the website</h1>
-        <br/>
-        <input type={"text"} onChange={e => setEmail(e.target.value)} />
-        <br/>
-        Already a user? <a href="/login">Login</a>
+  const handleSignup = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/users/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setMessage(data.message);
+      } else {
+        const errorData = await response.json();
+        setMessage(errorData.message);
+      }
+    } catch (error) {
+      console.error("An error occurred during signup:", error);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Sign Up for an Account</h1>
+      <br />
+      Username - <input type="text" onChange={(e) => setUsername(e.target.value)} />
+      <br />
+      <br />
+      Password - <input type="password" onChange={(e) => setPassword(e.target.value)} />
+      <br />
+      <button onClick={handleSignup}>Sign Up</button>
+      <br />
+      <p>{message}</p>
+      Already have an account? <a href="/login">Login</a>
     </div>
+  );
 }
 
-export default Register;
+export default Signup;

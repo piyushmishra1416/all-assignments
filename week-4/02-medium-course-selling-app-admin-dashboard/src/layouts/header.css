@@ -1,0 +1,30 @@
+/* Header.css */
+
+.header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 1rem;
+   background-color: #333; /* Change this to your desired background color */
+   color: white; /* Change text color as needed */
+ }
+ 
+ .header img {
+   max-width: 100px;
+   height: auto;
+ }
+ 
+ ul {
+   list-style: none;
+   display: flex;
+   gap: 1rem;
+   margin: 0;
+   padding: 0;
+ }
+ 
+ li {
+   font-size: 1.5rem;
+ }
+ 
+
+ 
