@@ -16,10 +16,11 @@ function CreateCourse() {
     // You can also send this data to your server for course creation
     // Example fetch request:
    
-    fetch("https://yourapi.com/create-course", {
+    fetch("http://localhost:3000/admin/courses", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
       body: JSON.stringify({
         title,
